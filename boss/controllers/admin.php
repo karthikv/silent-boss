@@ -1,15 +1,15 @@
 <?php
    
-   class Controller extends ControllerBase {
+   class Admin extends Controller {
 
-      public function Controller() {
-         parent::ControllerBase();
+      public function Admin() {
+         parent::Controller();
       }
 
       public function index() {
          $data = array(
             "title" => "Home",
-            "page" => "home"
+            "page" => "admin/index"
          );
 
          $this->loadView( 'index', $data );
@@ -22,4 +22,5 @@
       }
 
    }
+
 

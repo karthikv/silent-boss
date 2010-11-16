@@ -1,8 +1,8 @@
 <?php
 
-   class ControllerBase {
+   class Controller {
       
-      public function ControllerBase() {
+      public function Controller() {
 
       }
 
