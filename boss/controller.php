@@ -3,7 +3,7 @@
    class Controller {
 
       public function Controller() {
-         $this->loadHelper( 'util' );
+
       }
 
       public function index() {
@@ -42,8 +42,7 @@
          $path = $config[ 'php_root' ] . "/boss/$directory/$file";
 
          // append .php if necessary
-         if( strpos( $file, '.php' ) !== strlen( $file ) - 4 )
-            $path .= '.php';
+         $path = Util::addTrailing( '.php', $path );
 
          if( file_exists( $path ) ) {
             // make sure this doesn't override global configuration options 

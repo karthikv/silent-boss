@@ -22,21 +22,22 @@
          return $link;
       }
 
-      public static function addTrailing( $str, $substr ) {
+      public static function addTrailing( $substr, $str ) {
          // if the trailing $substr doesn't exist, add it in
          if( strrpos( $str, $substr ) !== strlen( $str ) - strlen( $substr ) )
             $str .= $substr;
          return $str;
       }
 
-      public static function removeTrailing( $str, $substr ) {
+      public static function removeTrailing( $substr, $str ) {
          $strLen = strlen( $str );
          $substrLen = strlen( $substr );
 
          // remove trailing $substr if it exists
-         if( strrpos( $str, $substr ) === $len - strlen( $substr ) )
+         if( strrpos( $str, $substr ) === $strLen - strlen( $substr ) )
             $str = substr( $str, 0, $strLen - $substrLen );
          return $str;
       }
 
    }
+
