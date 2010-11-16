@@ -3,7 +3,7 @@
    class Controller {
 
       public function Controller() {
-
+         $this->loadHelper( 'util' );
       }
 
       public function index() {
@@ -30,6 +30,10 @@
       // load a model
       protected function loadModel( $model ) {
          $this->load( 'models', $model );
+      }
+
+      protected function loadHelper( $helper ) {
+         $this->load( 'helpers', $helper );
       }
 
       // helper function to load a file in a given directory
