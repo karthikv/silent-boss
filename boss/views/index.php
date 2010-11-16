@@ -1,7 +1,7 @@
 <?php
-   $themeRoot = $config[ 'php_root' ] . '/boss/theme';
-   $pageRoot = $config[ 'php_root' ] . '/boss/views';
 
+   // theme directory corresponds to template
+   $themeRoot = $config[ 'php_root' ] . '/boss/theme';
    require_once $themeRoot . '/header.php';
       
    if( isset( $page ) )

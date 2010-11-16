@@ -6,6 +6,15 @@
 
       }
 
+      public static function getConfig( $key ) {
+         global $config;
+
+         // if the key exists in the array, return the value
+         if( isset( $config[ $key ] ) )
+            return $config[ $key ];
+         return false;
+      }
+
       public static function navigationLink( $to, $text, $desc ) {
          global $config;
 

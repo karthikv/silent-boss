@@ -6,5 +6,4 @@ Key
 - Make $config[ 'url_root' ] more accessible (see header.php, footer.php)
 - Better footer message (see footer.php)
 ~ Util class
-- Fix indentation (see styles.css)
 
