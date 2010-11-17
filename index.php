@@ -16,14 +16,18 @@
       } 
    }
 
-   // basic config and controller that are used for all requests
+   // basic config and routes that are used for all requests
    require_once $dir . '/config.php';
+   require_once $dir . '/routes.php';
    
    // conserve the namespace
    unset( $dir, $coreDir, $handle, $file );
 
    $request = isset( $_GET[ 'request' ] ) ? $_GET[ 'request' ] : 'index';
    $request = Util::removeTrailing( '/', $request );
+
+   foreach( $routes as $regex => $replacement )
+      $request = preg_replace( '~' . $regex . '~', $replacement, $request );
 
    // find the correct controller and method (request) to use
    $controllerName = $config[ 'default_controller' ];
