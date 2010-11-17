@@ -17,6 +17,7 @@
          $this->load( 'models', $model );
       }
 
+      // load a helper
       protected function loadHelper( $helper ) {
          $this->load( 'helpers', $helper );
       }

@@ -27,7 +27,7 @@
 
    // find the correct controller and method (request) to use
    $controllerName = $config[ 'default_controller' ];
-   if( ( $pos = strpos( $request, '/' ) !== false ) ) {
+   if( ( $pos = strpos( $request, '/' ) ) !== false ) {
       $controllerName = substr( $request, 0, $pos );
       $request = substr( $request, $pos + 1 );
    }
