@@ -14,5 +14,7 @@ Key
       - Users should be able to create pages via markdown
 - Make form builder to streamline the creation of HTML forms
    - Visual drag/drop or similar
+/ Creating routing functionality
+/ Redirect to most simplified request
 ? Move routes.php and config.php to core directory?
 

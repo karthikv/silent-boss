@@ -23,8 +23,19 @@
    // conserve the namespace
    unset( $dir, $coreDir, $handle, $file );
 
-   $request = isset( $_GET[ 'request' ] ) ? $_GET[ 'request' ] : 'index';
-   $request = Util::removeTrailing( '/', $request );
+   if( isset( $_GET[ 'request' ] ) ) {
+      $request = $_GET[ 'request' ];
+      $config[ 'request' ] = $request;
+
+      // simplify the request if possible
+      $simpleReq = Util::simplifyRequest( $request );
+      if( $simpleReq !== $request )
+         Util::redirect( $simpleReq, true );
+   }
+   else {
+      $request = 'index';
+      $config[ 'request' ] = ''; // home page in simplest form
+   }
 
    foreach( $routes as $regex => $replacement )
       $request = preg_replace( '~' . $regex . '~', $replacement, $request );
@@ -39,19 +50,21 @@
       $controllerName = $request; 
       $request = 'index'; // default to the index method
    }
-   
+
    // construct the controller if it's a valid class
    $controller = NULL;
    if( class_exists( $controllerName ) )
       $controller = new $controllerName(); 
+   
+   // store controller and method in case it needs to be accessed
+   $config[ 'controller' ] = $controllerName;
+   $config[ 'method' ] = $request;
 
-   unset( $controllerName, $pos );
+   unset( $simpleReq, $controllerName, $pos );
 
-   if( strpos( $request, '_' ) !== 0 && is_callable( array( $controller, $request ) ) ) {
-      // store request in case it needs to be accessed
-      $config[ 'request' ] = $request;
+   if( strpos( $request, '_' ) !== 0 && is_callable( array( $controller, $request ) ) )
+      // initiate the request
       $controller->{$request}();
-   }
    else {
       // construct the controller if it has not already been created
       if( $controller == NULL )
