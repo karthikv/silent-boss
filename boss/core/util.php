@@ -56,9 +56,9 @@
 
       public static function applyRoutes( $request ) {
          global $routes;
+
          foreach( $routes as $regex => $replacement )
             $request = preg_replace( '~' . $regex . '~', $replacement, $request );
-
          return $request;
       }
 

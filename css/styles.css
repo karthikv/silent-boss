@@ -107,6 +107,112 @@ ul, ol {
    font-size: 15px;
 }
 
+/* Forms */
+form p {
+	padding-bottom: 10px;
+}
+
+.radio-group {
+	font: 13px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Verdana, Sans-Serif;
+}
+
+form small {
+	font: 13px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Verdana, Sans-Serif;
+	color: #bbb;
+	margin-left: 10px;
+}
+
+label, input, textarea, select {
+	font: 13px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Verdana, Sans-Serif;
+}
+
+label {
+	display: inline-block;
+	width: 120px;
+	font-family: Georgia, Cambria, "Times New Roman", Times, Serif;
+	font-size: 14px;
+	float: left;
+	margin-top: 5px;
+}
+
+input, textarea, select {
+	border: 1px solid #ccc;
+	padding: 7px;
+	width: 200px;
+	height: 16px;
+	background: #f6f6f6;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.input-radio {
+	width: 15px;
+	margin-top: 5px;
+}
+
+.input-num {
+	width: 20px;
+}
+
+textarea {
+	width: 360px;
+	height: 160px;
+	line-height: 1.5;
+}
+
+select, .input-submit  {
+	height: 33px;
+	width: 215px;
+}
+
+.input-submit {
+	width: auto;
+   padding: 0 15px;
+	margin-left: 120px;
+	background: #333;
+	color: #fff;
+}
+
+input:hover, input:focus, textarea:hover, textarea:focus, select:hover, select:focus, .input-submit {
+	border-color: #aaa;
+	box-shadow: 0px 0px 10px #aaa;
+	-moz-box-shadow: 0px 0px 5px #aaa;
+	-webkit-box-shadow: 0px 0px 5px #aaa;
+}
+
+.input-submit, .input-submit:hover, .input-submit:focus {
+	border-color: #2a2a2a;
+}
+
+.input-submit:focus {
+	color: #000;
+}
+
+input:focus, textarea:focus {
+	background: #fff;
+}
+
+.success, .error, .info {
+	padding: 10px 10px 8px 10px;
+	margin-bottom: 10px;
+}
+
+.error {
+	color: #D8000C;
+	background-color: #FFBABA;
+}
+
+.success {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+}
+
+.info {
+	color: #00529B;
+	background-color: #BDE5F8;
+}
+
 /* Miscellaneous Styles */
 .none { display: none; }
 

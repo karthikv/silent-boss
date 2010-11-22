@@ -15,13 +15,23 @@
          $this->loadView( 'index', $data );
       }
 
-      public function add_post() {
+      public function add_page() {
          $data = array(
             "title" => "Add Post",
-            "page" => "admin/index"
+            "page" => "admin/add-page"
          );
 
          $this->loadView( 'index', $data );
+      }
+
+      public function add_page_handler() {
+         $this->loadHelper( 'markdown' );
+         $data = $_POST;
+
+         foreach( $_POST as $key => $value )
+            $_POST[ $key ] = stripslashes( $value );
+
+         echo markdown( $_POST[ 'text' ] );
       }
 
       // will be called if the user's request is invalid in the context of this 
