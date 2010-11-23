@@ -23,6 +23,10 @@
          $this->orderBy = array();
       }
 
+      public function __destruct() {
+         $this->mysqli->close();
+      }
+
       public function query( $query, $getResults = true ) {
          $this->query = $this->clean( $query ); 
          $this->prepare(); 
