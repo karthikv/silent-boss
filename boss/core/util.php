@@ -119,5 +119,16 @@
          return $str;
       }
 
+      public static function stripAllSlashes( $data ) {
+         if( get_magic_quotes_gpc() ) {
+            foreach( $data as $key => $value ) {
+               if( is_string( $value ) )
+                  $data[ $key ] = stripslashes( $data[ $key ] ); 
+            }
+         }
+
+         return $data;
+      }
+
    }
 

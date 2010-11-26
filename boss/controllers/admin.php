@@ -25,13 +25,14 @@
       }
 
       public function add_page_handler() {
+         $this->loadModel( 'page' );
          $this->loadHelper( 'markdown' );
-         $data = $_POST;
 
-         foreach( $_POST as $key => $value )
-            $_POST[ $key ] = stripslashes( $value );
+         $data = Util::stripAllSlashes( $_POST );
+         $data[ 'text' ] = markdown( $data[ 'text' ] );
 
-         echo markdown( $_POST[ 'text' ] );
+         echo $data[ 'text' ];
+         $this->page->insert( $data );
       }
 
       // will be called if the user's request is invalid in the context of this 

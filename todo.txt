@@ -9,9 +9,8 @@ Key
 / Make $config[ 'url_root' ] more accessible (see header.php, footer.php)
 - Better footer message (see footer.php)
 / Util class
-- Implement administrator dashboard that lets users add pages
-   - Pages should have basic CRUD (create, read, update, and delete) functionality
-      - Users should be able to create pages via markdown
+- Implement bash scripts to easily add pages
+   - Create pages via markdown text
 - Make form builder to streamline the creation of HTML forms
    - Visual drag/drop or similar
 / Creating routing functionality
