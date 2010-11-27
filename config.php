@@ -18,7 +18,6 @@
 
 /* database configuration ***************************/
 
-   /* if using models
    // mysql host for the database connection
    $config[ 'mysql_host' ] = 'localhost';
 
@@ -28,7 +27,6 @@
 
    // name of database that will be used
    $config[ 'mysql_database' ] = 'silent-boss';
-    */
 
 /* do not edit past here ****************************/
 

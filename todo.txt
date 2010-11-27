@@ -9,10 +9,8 @@ Key
 / Make $config[ 'url_root' ] more accessible (see header.php, footer.php)
 - Better footer message (see footer.php)
 / Util class
-- Implement bash scripts to easily add pages
-   - Create pages via markdown text
-- Make form builder to streamline the creation of HTML forms
-   - Visual drag/drop or similar
+- Make form helper to streamline the creation of HTML forms
+   - PHP-based
 / Creating routing functionality
 / Redirect to most simplified request
 ? Move routes.php and config.php to core directory?
