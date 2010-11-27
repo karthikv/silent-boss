@@ -10,13 +10,14 @@ views, and models may be found in the boss directory.
 Other additions include:
 
 - .htaccess to map all requests to index.php
-- A config.php file in the root to set basic configuration values
-- A default, minimalist theme
+- Config.php file in the root to set basic configuration values
+- Routing of requests
+- Database helper class
+- Default, minimalist theme
 
 Planned future updates are:
 
-- An administrator dashboard to streamline the addition of pages via markdown.
-- A form builder to help create and validate forms without the normal hassle.
+- Form helper to create and validate forms without the normal hassle.
 - More features that have yet to be decided upon
 
 Documentation for silent boss is currently not available. It will be present

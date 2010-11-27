@@ -2,7 +2,7 @@
 
    $config = array();
 
-/* general configuration ****************************/
+   /* GENERAL CONFIGURATION */
 
    // title of the website
    $config[ 'site_title' ] = 'Silent Boss';
@@ -16,7 +16,7 @@
    // php root url - you generally don't need to change this
    $config[ 'php_root' ] = dirname( __FILE__ );
 
-/* database configuration ***************************/
+   /* DATABASE CONFIGURATION */
 
    // mysql host for the database connection
    $config[ 'mysql_host' ] = 'localhost';
@@ -28,7 +28,7 @@
    // name of database that will be used
    $config[ 'mysql_database' ] = 'silent-boss';
 
-/* do not edit past here ****************************/
+   /* DO NOT EDIT PAST HERE */
 
    $config[ 'url_root' ] = Util::removeTrailing( '/', $config[ 'url_root' ] );
 
