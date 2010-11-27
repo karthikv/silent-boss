@@ -12,12 +12,22 @@
 
       // data
       private $query;
+      private $table;
+      private $select;
+      private $join;
       private $where;
       private $orderBy;
       private $limit;
 
+      // helpers
+      private $joinTypes;
+
       public function DB( $host, $username, $password, $db ) {
          $this->mysqli = new mysqli( $host, $username, $password, $db ); 
+
+         $this->joinTypes = array( 'INNER', 'OUTER', 'LEFT', 'RIGHT', 
+            'LEFT OUTER', 'RIGHT OUTER' );
+         $this->join = array();
 
          $this->where = array();
          $this->orderBy = array();
@@ -33,32 +43,72 @@
          return $this->run( $getResults );
       }
 
-      public function get( $table ) {
-         $this->query = "SELECT * FROM {$this->clean( $table )}";
+      public function from( $table ) {
+         $this->table( $table );
+      }
+
+      public function join( $table, $on, $type = 'inner' ) {
+         $type = strtoupper( trim( $type ) );
+         if( !in_array( $type, $this->joinTypes ) )
+            return; 
+         
+         $table = $this->clean( $table );
+         $this->join[ $table ] = array(
+            'type' => $type . ' JOIN',
+            'on' => $on
+         );
+      }
+
+      public function get( $table = false ) {
+         if( !isset( $this->select ) )
+            $this->select( '*' );
+
+         $this->from( $table );
          $this->compile( 'select' );
          return $this->run( true );
       }
 
-      public function insert( $table, $data ) {
-         $this->query = "INSERT INTO {$this->clean( $table )}";
+      public function select( $select ) {
+         $this->select = $this->clean( $select );
+      }
+
+      public function table( $table ) {
+         if( $table !== false )
+            $this->table = $this->clean( $table );
+      }
+
+      public function insert( $data, $table = false ) {
+         $this->table( $table );
          $this->compile( 'insert', $data ); 
          return $this->run( false );
       }
 
-      public function update( $table, $data ) {
-         $this->query = "UPDATE {$this->clean( $table )}";
+      public function update( $data, $table = false ) {
+         $this->table( $table );
          $this->compile( 'update', $data );
          return $this->run( false );
       }
 
-      public function delete( $table ) {
-         $this->query = "DELETE FROM {$this->clean( $table )}";
+      public function delete( $table = false ) {
+         $this->from( $table );
          $this->compile( 'delete' );
          return $this->run( false );
       }
 
-      public function where( $property, $value ) {
-         $this->where[ $this->clean( $property ) ] = $this->clean( $value );
+      public function where( $property, $value, $operator = '=' ) {
+         $this->processWhere( 'AND', $property, $operator, $value );
+      }
+
+      public function orWhere( $property, $value, $operator = '=' ) {
+         $this->processWhere( 'OR', $property, $operator, $value );
+      }
+      
+      private function processWhere( $type, $property, $operator, $value ) {
+         $this->where[ $this->clean( $property ) ] = array(
+            'type' => $type,
+            'operator' => $this->clean( $operator ),
+            'value' => $this->clean( $value )
+         );
       }
 
       public function orderBy( $field, $asc = true ) {
@@ -111,20 +161,26 @@
 
          switch( $type ) {
          case 'select':
-         case 'delete':
+            $this->query = "SELECT {$this->select} FROM {$this->table}";
+            $this->query .= $this->getJoinClause();
+
             $this->query .= $where;
+            $this->query .= $this->getOrderByClause();
             break;
          case 'insert':
+            $this->query = "INSERT INTO {$this->table}";
             $this->query .= $this->getInsertClause( $data );
             break;
          case 'update':
+            $this->query = "UPDATE {$this->table}";
             $this->query .= $this->getUpdateClause( $data );
             $this->query .= $where;
             break;
+         case 'delete':
+            $this->query = "DELETE FROM {$this->table}";
+            $this->query .= $where;
+            break;
          }
-
-         if( $type === 'select' )
-            $this->query .= $this->getOrderByClause();
 
          if( $type === 'select' || $type === 'update' || $type === 'delete' )
             $this->query .= $this->getLimitClause(); 
@@ -150,19 +206,24 @@
                foreach( $this->where as $property => $value )
                   // can't use &$value because it's just a copy of the value in 
                   // $this->where
-                  $paramArray[] = &$this->where[ $property ];
+                  $paramArray[] = &$this->where[ $property ][ 'value' ];
             } 
 
             call_user_func_array( array( $this->stmt, 'bind_param' ), $paramArray );
          }
 
+         $this->join = array();
          $this->where = array();
          $this->orderBy = array();
+
+         unset( $this->select );
+         unset( $this->table );
          unset( $this->limit );
       }
 
       private function prepare() {
-         $this->stmt = $this->mysqli->prepare( $this->query ); 
+         if( ( $this->stmt = $this->mysqli->prepare( $this->query ) ) === false )
+            trigger_error( "Statement preparation failed: {$this->mysqli->error}" ); 
       }
 
       private function getInsertClause( $data ) {
@@ -204,19 +265,36 @@
          return $update;
       }
 
+      private function getJoinClause() {
+         $join = '';
+
+         if( count( $this->join ) > 0 ) {
+            foreach( $this->join as $table => $data )
+               $join .= " {$data[ 'type' ]} $table ON {$data[ 'on' ]}";
+         }
+
+         return $join;
+      }
+
       private function getWhereClause() {
          $this->whereString = '';
          $where = '';
 
          if( count( $this->where ) > 0 ) {
             $where = ' WHERE ';
+            $count = 0;
 
-            foreach( $this->where as $property => $value ) {
-               $where .= "$property = ? AND "; 
-               $this->whereString .= $this->getParamType( $value );
+            foreach( $this->where as $property => $data ) {
+               if( $count !== 0 )
+                  $where .= "{$data[ 'type' ]} ";
+
+               $where .= "$property {$data[ 'operator' ]} ? "; 
+               $this->whereString .= $this->getParamType( $data[ 'value' ] );
+
+               $count++;
             }
 
-            $where = substr( $where, 0, strlen( $where ) - 5 );
+            $where = substr( $where, 0, -1 );
          }
 
          return $where;
