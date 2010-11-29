@@ -9,8 +9,8 @@ Key
 / Make $config[ 'url_root' ] more accessible (see header.php, footer.php)
 - Better footer message (see footer.php)
 / Util class
-- Make form helper to streamline the creation of HTML forms
-   - PHP-based
+/ Make form helper to streamline the creation of HTML forms
+   / PHP-based
 / Creating routing functionality
 / Redirect to most simplified request
 ? Move routes.php and config.php to core directory?

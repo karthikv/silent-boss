@@ -2,7 +2,7 @@
 
    // used for relative includes
    $dir = dirname( __FILE__ );
-   $includeDirs = array( 'boss/core', 'boss/controllers' );
+   $includeDirs = array( 'boss/dependencies', 'boss/core', 'boss/controllers' );
 
    // include all files from each include directory
    foreach( $includeDirs as $includeDir ) {

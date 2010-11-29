@@ -138,8 +138,9 @@ form p {
    padding-bottom: 10px;
 }
 
-.radio-group {
-   font: 13px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Verdana, Sans-Serif;
+form p {
+	padding: 5px 0;
+	border-bottom: 1px dotted #eee;
 }
 
 form small {
@@ -172,13 +173,22 @@ input, textarea, select {
    -webkit-border-radius: 3px;
 }
 
-.input-radio {
+.radio-field {
    width: 15px;
    margin-top: 5px;
 }
 
-.input-num {
+.number-field {
    width: 20px;
+}
+
+.checkbox-field {
+	width: 15px;
+   margin-top: 5px;
+}
+
+.ampm {
+   width: 60px;
 }
 
 textarea {
@@ -187,31 +197,31 @@ textarea {
    line-height: 1.5;
 }
 
-select, .input-submit  {
+select, .submit-field  {
    height: 33px;
    width: 215px;
 }
 
-.input-submit {
+.submit-field {
    width: auto;
    padding: 0 15px;
-   margin-left: 120px;
+   margin: 5px 0 0 120px;
    background: #333;
    color: #fff;
 }
 
-input:hover, input:focus, textarea:hover, textarea:focus, select:hover, select:focus, .input-submit {
+input:hover, input:focus, textarea:hover, textarea:focus, select:hover, select:focus, .submit-field {
    border-color: #aaa;
    box-shadow: 0px 0px 10px #aaa;
    -moz-box-shadow: 0px 0px 5px #aaa;
    -webkit-box-shadow: 0px 0px 5px #aaa;
 }
 
-.input-submit, .input-submit:hover, .input-submit:focus {
+.submit-field, .submit-field:hover, .submit-field:focus {
    border-color: #2a2a2a;
 }
 
-.input-submit:focus {
+.submit-field:focus {
    color: #000;
 }
 
@@ -220,8 +230,12 @@ input:focus, textarea:focus {
 }
 
 .success, .error, .info {
-   padding: 10px 10px 8px 10px;
+   padding: 10px 20px 8px 20px;
    margin-bottom: 10px;
+}
+
+.success-container, .error-container, .info-container {
+   padding: 15px 20px 0 20px;
 }
 
 .error {

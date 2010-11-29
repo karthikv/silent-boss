@@ -4,41 +4,42 @@
 
       public function Admin() {
          parent::Controller();
+
+         $this->load->library( 'session' );
+         $this->load->helper( 'form' );
+         $this->load->helper( 'validator' );
       }
 
       public function index() {
          $data = array(
-            "title" => "Home",
-            "page" => "admin/index"
+            'title' => 'Home',
+            'page' => 'admin/index'
          );
 
-         $this->loadView( 'index', $data );
+         $this->load->view( 'index', $data );
       }
 
-      public function add_page() {
-         $data = array(
-            "title" => "Add Post",
-            "page" => "admin/add-page"
-         );
+      public function form_handler() {
+         $validator = new Validator( $_POST );
+         $validator->setRules( 'name', 'Name', 'minLength[4]|maxLength[8]' );
+         $validator->setRules( 'date', 'Date', 'dateRange[ 12/27/10, 12/28/10 ]' );
 
-         $this->loadView( 'index', $data );
-      }
+         if( $validator->validate() ) {
+            $validator->storeSuccessMessage( 'Success!' );
+         }
 
-      public function add_page_handler() {
-         $this->loadModel( 'page' );
-         $this->loadHelper( 'markdown' );
-
-         $data = Util::stripAllSlashes( $_POST );
-         $data[ 'text' ] = markdown( $data[ 'text' ] );
-
-         echo $data[ 'text' ];
-         $this->page->insert( $data );
+         Util::redirect( 'admin', true );
       }
 
       // will be called if the user's request is invalid in the context of this 
       // controller
       public function _unknown( $request ) {
-         echo "Not found!";
+         $data = array(
+            'title' => 'Not found',
+            'page' => 'pages/not-found',
+         );
+         
+         $this->load->view( 'index', $data );
       }
 
    }
