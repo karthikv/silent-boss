@@ -66,8 +66,9 @@
       // initiate the request
       $controller->{$request}();
    else {
-      // construct the controller if it has not already been created
-      if( $controller == NULL )
+      // construct the controller if it has not already been created or if the 
+      // unkown method doesn't exist
+      if( $controller == NULL || !is_callable( array( $controller, '_unknown' ) ) )
          $controller = new $config[ 'default_controller' ];
 
       // underscores represent special requests not directly accessible 

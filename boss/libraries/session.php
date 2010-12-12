@@ -9,7 +9,7 @@
       private $flash;
 
       private function Session() {
-         $this->start( sha1( Util::getConfig( 'site_title' ) ) . '-session' );
+         $this->start();
 
          $this->flash = array();
          foreach( $_SESSION as $key => $value ) {
@@ -92,11 +92,10 @@
          session_destroy();
       }
 
-      private function start( $name ) {
+      private function start() {
          $domain = $_SERVER[ 'SERVER_NAME' ];
          $secure = isset( $_SERVER[ 'HTTPS' ] );
 
-         session_name( $name . '-session' );
          session_set_cookie_params( 0, '/', $domain, $secure, true );
          session_start();
 
@@ -122,7 +121,7 @@
       }
 
       private function isInvalid() {
-         return isset( $_SESSION[ 'isObselete' ] ) && $_SESSION[ 'isObselete' ] === true
+         return isset( $_SESSION[ 'isObsolete' ] ) && $_SESSION[ 'isObsolete' ] === true
             && ( !isset( $_SESSION[ 'expireTime' ] ) || $_SESSION[ 'expireTime' ] <= time() );
       }
 
