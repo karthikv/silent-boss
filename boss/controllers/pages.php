@@ -20,7 +20,7 @@
       public function _unknown( $request ) {
          $data = array(
             'title' => 'Not found',
-            'page' => 'pages/not-found',
+            'page' => 'pages/not-found'
          );
 
          $this->load->view( 'index', $data );

@@ -25,7 +25,6 @@
 
    if( isset( $_GET[ 'request' ] ) ) {
       $request = $_GET[ 'request' ];
-      $config[ 'request' ] = $request;
 
       // simplify the request if possible
       $simpleReq = Util::simplifyRequest( $request );
@@ -37,8 +36,8 @@
       $config[ 'request' ] = ''; // home page in simplest form
    }
 
-   foreach( $routes as $regex => $replacement )
-      $request = preg_replace( '~' . $regex . '~', $replacement, $request );
+   $request = Util::applyRoutes( $request );
+   $config[ 'request' ] = $request;
 
    // find the correct controller and method (request) to use
    $controllerName = $config[ 'default_controller' ];

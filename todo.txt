@@ -14,4 +14,11 @@ Key
 / Creating routing functionality
 / Redirect to most simplified request
 ? Move routes.php and config.php to core directory?
+- Fix unclosed title tag in header.php
+- Ensure default controller is lowercase in config.php
+- strtolower( $request ) in Util (controversial?)
+- Extra comma in pages.php array
+- Apply routes instead of for loop in index.php
+- Move assignment of $config[ 'request' ] in index.php
+- Extract $GLOBALS in template
 

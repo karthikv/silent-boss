@@ -5,8 +5,15 @@
       <h3>Pages</h3>
       <ul>
          <?php
-            echo Util::navigationLink( '', 'Home', 'Home, Sweet Home!' );
-            echo Util::navigationLink( 'admin', 'Administrator Dashboard', 'Manage your website' );
+            if( Util::isLoggedIn() )
+            {
+
+            }
+            else
+            {
+               echo Util::navigationLink( '', 'Home', 'Home, Sweet Home!' );
+               echo Util::navigationLink( 'log-in', 'Log In', 'Let\'s get it started!' );
+            }
          ?>
       </ul>
    </div>

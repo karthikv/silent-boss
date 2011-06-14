@@ -4,7 +4,7 @@
 <head>
    <meta charset="utf-8" />
 	
-   <title><?= $title ?><title>
+   <title><?= $title ?></title>
    <link rel="stylesheet" href="<?= Util::getConfig( 'url_root' ) ?>/css/styles.css" type="text/css" media="screen"/>
 </head>
 <body>

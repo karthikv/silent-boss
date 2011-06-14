@@ -6,6 +6,12 @@
 
       }
 
+      public static function isLoggedIn()
+      {
+         global $controller;
+         return $controller->session->hasFlash( 'auth' );
+      }
+
       public static function getConfig( $key ) {
          global $config;
 
@@ -31,6 +37,7 @@
 
       public static function simplifyRequest( $request ) {
          global $config, $routes;
+         $request = strtolower( $request );
 
          // find the controller
          $controller = $request;
