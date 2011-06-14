@@ -21,7 +21,7 @@
    require_once $dir . '/routes.php';
    
    // conserve the namespace
-   unset( $dir, $coreDir, $handle, $file );
+   unset( $dir, $curDir, $handle, $file );
 
    if( isset( $_GET[ 'request' ] ) ) {
       $request = $_GET[ 'request' ];
