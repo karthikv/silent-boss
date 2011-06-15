@@ -83,7 +83,7 @@
          session_id( $id );
          session_start();
 
-         unset( $_SESSION[ 'isObselete' ] );
+         unset( $_SESSION[ 'isObsolete' ] );
          unset( $_SESSION[ 'expireTime' ] );
       }
 
@@ -95,6 +95,9 @@
       private function start() {
          $domain = $_SERVER[ 'SERVER_NAME' ];
          $secure = isset( $_SERVER[ 'HTTPS' ] );
+
+         if( $domain == 'localhost' ) // development server
+            $domain = '';
 
          session_set_cookie_params( 0, '/', $domain, $secure, true );
          session_start();

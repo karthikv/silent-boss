@@ -21,4 +21,8 @@ Key
 - Apply routes instead of for loop in index.php
 - Move assignment of $config[ 'request' ] in index.php
 - Extract $GLOBALS in template
+- Localhost check in session library
+- Obsolete correction in session library
+
+- Load session in form and validator helpers?
 
