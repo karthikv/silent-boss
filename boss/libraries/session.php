@@ -96,7 +96,7 @@
          $domain = $_SERVER[ 'SERVER_NAME' ];
          $secure = isset( $_SERVER[ 'HTTPS' ] );
 
-         if( $domain == 'localhost' ) // development server
+         if( $domain === 'localhost' || $domain === '127.0.0.1' ) // development server
             $domain = '';
 
          session_set_cookie_params( 0, '/', $domain, $secure, true );

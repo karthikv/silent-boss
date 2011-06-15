@@ -5,13 +5,13 @@
    /* GENERAL CONFIGURATION */
 
    // title of the website
-   $config[ 'site_title' ] = 'SD Team Manager';
+   $config[ 'site_title' ] = 'Silent Boss';
 
    // name of the actual controller class
-   $config[ 'default_controller' ] = 'Authentication';
+   $config[ 'default_controller' ] = 'Pages';
 
    // root url
-   $config[ 'url_root' ] = 'http://localhost:8888/sd-team-manager';
+   $config[ 'url_root' ] = 'http://localhost:8888/silent-boss';
 
    // php root url - you generally don't need to change this
    $config[ 'php_root' ] = dirname( __FILE__ );
@@ -26,7 +26,7 @@
    $config[ 'mysql_password' ] = 'root';
 
    // name of database that will be used
-   $config[ 'mysql_database' ] = 'sd_team_manager';
+   $config[ 'mysql_database' ] = 'silent-boss';
 
    /* DO NOT EDIT PAST HERE */
 

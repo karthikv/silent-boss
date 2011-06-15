@@ -6,11 +6,6 @@
 
       }
 
-      public static function isLoggedIn() {
-         global $controller;
-         return $controller->session->hasFlash( 'id' );
-      }
-
       public static function getConfig( $key ) {
          global $config;
 
