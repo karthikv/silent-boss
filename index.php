@@ -30,14 +30,14 @@
       $simpleReq = Util::simplifyRequest( $request );
       if( $simpleReq !== $request )
          Util::redirect( $simpleReq, true );
+
+      $request = Util::applyRoutes( $request );
+      $config[ 'request' ] = $request;
    }
    else {
       $request = 'index';
       $config[ 'request' ] = ''; // home page in simplest form
    }
-
-   $request = Util::applyRoutes( $request );
-   $config[ 'request' ] = $request;
 
    // find the correct controller and method (request) to use
    $controllerName = $config[ 'default_controller' ];
