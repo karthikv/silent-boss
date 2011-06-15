@@ -6,8 +6,7 @@
 
       }
 
-      public static function isLoggedIn()
-      {
+      public static function isLoggedIn() {
          global $controller;
          return $controller->session->hasFlash( 'id' );
       }

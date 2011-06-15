@@ -25,6 +25,7 @@ Key
 - Obsolete correction in session library
 - Database chaining
 - Models folder
+- Custom error message in validator helper
 
 - Load session in form and validator helpers?
 

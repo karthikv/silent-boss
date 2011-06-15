@@ -15,6 +15,9 @@
       private $errorMessageStartDelim;
       private $errorMessageEndDelim;
 
+      private $beforeCustomErrorMessage;
+      private $afterCustomErrorMessage;
+
       private $beforeSuccessMessage;
       private $afterSuccessMessage;
 
@@ -39,6 +42,9 @@
          $this->setErrorMessageStartDelim( '<li>' );
          $this->setErrorMessageEndDelim( '</li>' );
 
+         $this->setBeforeCustomErrorMessage( '<p class="error">' );
+         $this->setAfterCustomErrorMessage( '</p>' );
+
          $this->setBeforeSuccessMessage( '<p class="success">' );
          $this->setAfterSuccessMessage( '</p>' );
 
@@ -60,6 +66,14 @@
 
       public function setErrorMessageEndDelim( $delim ) {
          $this->errorMessageEndDelim = $delim;
+      }
+
+      public function setBeforeCustomErrorMessage( $str ) {
+         $this->beforeCustomErrorMessage = $str;
+      }
+
+      public function setAfterCustomErrorMessage( $str ) {
+         $this->afterCustomErrorMessage = $str;
       }
 
       public function setBeforeSuccessMessage( $str ) {
@@ -167,8 +181,14 @@
          $controller->session->setFlash( 'formData', $data );
       }
 
-      public function storeErrorMessage( $message ) {
+      private function storeErrorMessage( $message ) {
          global $controller;
+         $controller->session->setFlash( 'errorMessage', $message );
+      }
+
+      public function storeCustomErrorMessage( $message ) {
+         global $controller;
+         $message = "{$this->beforeCustomErrorMessage}$message{$this->afterCustomErrorMessage}";
          $controller->session->setFlash( 'errorMessage', $message );
       }
 
