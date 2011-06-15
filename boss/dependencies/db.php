@@ -45,6 +45,7 @@
 
       public function from( $table ) {
          $this->table( $table );
+         return $this;
       }
 
       public function join( $table, $on, $type = 'inner' ) {
@@ -57,6 +58,8 @@
             'type' => $type . ' JOIN',
             'on' => $on
          );
+
+         return $this;
       }
 
       public function get( $table = false ) {
@@ -70,11 +73,13 @@
 
       public function select( $select ) {
          $this->select = $this->clean( $select );
+         return $this;
       }
 
       public function table( $table ) {
          if( $table !== false )
             $this->table = $this->clean( $table );
+         return $this;
       }
 
       public function insert( $data, $table = false ) {
@@ -97,10 +102,12 @@
 
       public function where( $property, $value, $operator = '=' ) {
          $this->processWhere( 'AND', $property, $operator, $value );
+         return $this;
       }
 
       public function orWhere( $property, $value, $operator = '=' ) {
          $this->processWhere( 'OR', $property, $operator, $value );
+         return $this;
       }
       
       private function processWhere( $type, $property, $operator, $value ) {
@@ -117,10 +124,12 @@
             $value = 'DESC';
 
          $this->orderBy[ $this->clean( $field ) ] = $value;
+         return $this;
       }
 
       public function limit( $num ) {
          $this->limit = (int) $num;
+         return $this;
       }
 
       private function run( $getResults ) {

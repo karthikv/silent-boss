@@ -26,7 +26,7 @@
    $config[ 'mysql_password' ] = 'root';
 
    // name of database that will be used
-   $config[ 'mysql_database' ] = 'silent-boss';
+   $config[ 'mysql_database' ] = 'sd_team_manager';
 
    /* DO NOT EDIT PAST HERE */
 
